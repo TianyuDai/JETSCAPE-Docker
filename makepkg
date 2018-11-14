@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# read optional argument destdir (where to place package file)
+# default is the current directory
+destdir=${1-.}
+
+git clone https://github.com/KevinVan720/JETSCAPE-COMP
+cd JETSCAPE-COMP/external_packages
+./get_music.sh
+./get_iSS.sh
+cd ..
+
+# create a temporary directory for installing files
+installdir=$(mktemp --directory)
+# and ensure it's cleaned on exit
+trap "rm -rf $installdir" EXIT
+
+pkgname='JETSCAPE'
+pkgdir="$installdir/$pkgname"
+
+load_osg()
+{
+    module load cmake boost hdf5 gsl root zlib
+    wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
+    tar xvfz pythia8235.tgz
+    cd pythia8235
+    ./configure --prefix=$pkgdir --enable-64bit
+    make -j16
+    make install
+    cd ..
+    wget http://hepmc.web.cern.ch/hepmc/releases/hepmc3.0.0.tgz
+    tar -xvzf hepmc3.0.0.tgz
+    cd hepmc3.0.0/cmake
+    cmake --prefix=$pkgdir ..
+    make -j16
+    make install
+    cd ..
+}
+
+if [[ $(hostname) =~ opensciencegrid.org|osgconnect.net ]]; then
+  load_osg
+fi
+
+if [[ -d build ]]; then
+  cd build
+else
+  mkdir build && cd build
+fi
+  cmake \
+    -Dmusic=ON \
+    -DiSS=ON \
+    .. || exit 1
+  # compile and install to the temporary directory
+  make || exit 1
+  #make DESTDIR=$pkgdir install || exit 1
+  
+# create tgz for distributing to each job
+#tar --verbose --create --gzip --file $destdir/$pkgname.tar.gz \
+# --directory $installdir $pkgname
