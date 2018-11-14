@@ -15,8 +15,8 @@ installdir=$(mktemp --directory)
 # and ensure it's cleaned on exit
 trap "rm -rf $installdir" EXIT
 
-pkgname='JETSCAPE'
-pkgdir="$installdir/$pkgname"
+#pkgname='JETSCAPE'
+#pkgdir=.local
 
 load_osg()
 {
@@ -24,14 +24,14 @@ load_osg()
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
     tar xvfz pythia8235.tgz
     cd pythia8235
-    ./configure --prefix=$pkgdir --enable-64bit
+    ./configure --prefix=.local --enable-64bit
     make -j16
     make install
     cd ..
     wget http://hepmc.web.cern.ch/hepmc/releases/hepmc3.0.0.tgz
     tar -xvzf hepmc3.0.0.tgz
     cd hepmc3.0.0/cmake
-    cmake --prefix=$pkgdir ..
+    cmake --prefix=.local ..
     make -j16
     make install
     cd ..
