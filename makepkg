@@ -2,21 +2,7 @@
 
 # read optional argument destdir (where to place package file)
 # default is the current directory
-destdir=${1-.}
-
-git clone https://github.com/KevinVan720/JETSCAPE-COMP
-cd JETSCAPE-COMP/external_packages
-./get_music.sh
-./get_iSS.sh
-cd ..
-
-# create a temporary directory for installing files
-installdir=$(mktemp --directory)
-# and ensure it's cleaned on exit
-trap "rm -rf $installdir" EXIT
-
-#pkgname='JETSCAPE'
-#pkgdir=.local
+#destdir=${1-.}
 
 load_osg()
 {
@@ -40,6 +26,22 @@ load_osg()
 if [[ $(hostname) =~ opensciencegrid.org|osgconnect.net ]]; then
   load_osg
 fi
+
+git clone https://github.com/KevinVan720/JETSCAPE-COMP
+cd JETSCAPE-COMP/external_packages
+./get_music.sh
+./get_iSS.sh
+cd ..
+
+# create a temporary directory for installing files
+installdir=$(mktemp --directory)
+# and ensure it's cleaned on exit
+trap "rm -rf $installdir" EXIT
+
+#pkgname='JETSCAPE'
+#pkgdir=.local
+
+
 
 if [[ -d build ]]; then
   cd build
