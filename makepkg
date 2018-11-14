@@ -27,7 +27,7 @@ load_osg()
     wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
     tar -xvzf openmpi-4.0.0.tar.gz
     cd openmpi-4.0.0
-    ./configure
+    ./configure --prefix=~/.local
     make all install
     cd ..
     #rm -r pythia8235* hepmc3.0.0* openmpi-4.0.0*
@@ -40,8 +40,8 @@ fi
 
 git clone https://github.com/KevinVan720/JETSCAPE-COMP
 cd JETSCAPE-COMP/external_packages
-#./get_music.sh
-#./get_iSS.sh
+./get_music.sh
+./get_iSS.sh
 cd ..
 
 # create a temporary directory for installing files
@@ -59,7 +59,7 @@ if [[ -d build ]]; then
 else
   mkdir build && cd build
 fi
-  cmake .. || exit 1
+  cmake -Dmusic=ON -DiSS=ON .. || exit 1
     #-Dmusic=ON \
     #-DiSS=ON \
     
