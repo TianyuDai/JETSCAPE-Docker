@@ -30,7 +30,7 @@ load_osg()
     ./configure
     make all install
     cd ..
-    rm -r pythia8235* hepmc3.0.0* openmpi-4.0.0*
+    #rm -r pythia8235* hepmc3.0.0* openmpi-4.0.0*
 
 }
 
