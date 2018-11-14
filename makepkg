@@ -6,7 +6,7 @@
 
 load_osg()
 {
-    source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
+    #source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
 
     module load cmake boost hdf5 gsl root zlib mpi
 
@@ -32,14 +32,14 @@ fi
 
 git clone https://github.com/KevinVan720/JETSCAPE-COMP
 cd JETSCAPE-COMP/external_packages
-./get_music.sh
-./get_iSS.sh
+#./get_music.sh
+#./get_iSS.sh
 cd ..
 
 # create a temporary directory for installing files
-installdir=$(mktemp --directory)
+#installdir=$(mktemp --directory)
 # and ensure it's cleaned on exit
-trap "rm -rf $installdir" EXIT
+#trap "rm -rf $installdir" EXIT
 
 #pkgname='JETSCAPE'
 #pkgdir=.local
