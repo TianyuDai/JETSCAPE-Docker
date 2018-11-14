@@ -23,7 +23,7 @@ load_osg()
     cmake --prefix=~/.local ..
     make -j16
     make install
-    cd ..
+    cd ../..
     wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
     tar -xvzf openmpi-4.0.0.tar.gz
     cd openmpi-4.0.0
