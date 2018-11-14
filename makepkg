@@ -8,7 +8,7 @@ load_osg()
 {
     #source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
 
-    module load cmake boost hdf5 gsl root zlib mpi
+    module load cmake boost hdf5 gsl root zlib
 
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
     tar xvfz pythia8235.tgz
@@ -51,10 +51,10 @@ if [[ -d build ]]; then
 else
   mkdir build && cd build
 fi
-  cmake \
+  cmake .. || exit 1
     #-Dmusic=ON \
     #-DiSS=ON \
-    .. || exit 1
+    
   # compile and install to the temporary directory
   make || exit 1
   #make DESTDIR=$pkgdir install || exit 1
