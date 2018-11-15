@@ -14,16 +14,16 @@ load_required()
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
     tar xvfz pythia8235.tgz*
     cd pythia8235
-    ./configure --prefix=~/.local --enable-64bit
+    ./configure --prefix=/usr/local --enable-64bit
     make -j16
-    make install
+    sudo make install
     cd ..
     wget http://hepmc.web.cern.ch/hepmc/releases/hepmc3.0.0.tgz
     tar -xvzf hepmc3.0.0.tgz
     cd hepmc3.0.0/cmake
-    cmake --prefix=~/.local ..
+    cmake --prefix=/usr/local ..
     make -j16
-    make install
+    sudo make install
     cd ../..
 }
     #wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
@@ -40,11 +40,11 @@ load_required()
 
 load_required
 
-git clone https://github.com/KevinVan720/JETSCAPE-COMP
-cd JETSCAPE-COMP/external_packages
-./get_music.sh
-./get_iSS.sh
-cd ..
+#git clone https://github.com/KevinVan720/JETSCAPE-COMP
+#cd JETSCAPE-COMP/external_packages
+#./get_music.sh
+#./get_iSS.sh
+#cd ..
 
 # create a temporary directory for installing files
 #installdir=$(mktemp --directory)
@@ -56,17 +56,17 @@ cd ..
 
 
 
-if [[ -d build ]]; then
-  cd build
-else
-  mkdir build && cd build
-fi
-  cmake -Dmusic=ON -DiSS=ON .. || exit 1
+#if [[ -d build ]]; then
+# cd build
+#else
+#  mkdir build && cd build
+#fi
+#  cmake -Dmusic=ON -DiSS=ON .. || exit 1
     #-Dmusic=ON \
     #-DiSS=ON \
     
   # compile and install to the temporary directory
-  make || exit 1
+#  make || exit 1
   #make DESTDIR=$pkgdir install || exit 1
   
 # create tgz for distributing to each job
