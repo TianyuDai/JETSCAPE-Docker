@@ -4,12 +4,13 @@
 # default is the current directory
 #destdir=${1-.}
 
-load_required()
+load_required() 
 {
     #source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
     #module load cmake boost hdf5 gsl root zlib
     if [[ ! -d ~/.local ]]; then
-    mkdir ~/.local
+      mkdir ~/.local
+    fi
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
     tar xvfz pythia8235.tgz
     cd pythia8235
@@ -24,6 +25,7 @@ load_required()
     make -j16
     make install
     cd ../..
+}
     #wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
     #tar -xvzf openmpi-4.0.0.tar.gz
     #cd openmpi-4.0.0
@@ -31,8 +33,6 @@ load_required()
     #make all install
     #cd ..
     #rm -r pythia8235* hepmc3.0.0* openmpi-4.0.0*
-
-}
 
 #if [[ $(hostname) =~ opensciencegrid.org|osgconnect.net ]]; then
 # load_osg
