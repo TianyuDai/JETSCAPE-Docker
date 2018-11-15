@@ -4,12 +4,12 @@
 # default is the current directory
 #destdir=${1-.}
 
-load_osg()
+load_required()
 {
     #source /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/current/init/bash
-
-    module load cmake boost hdf5 gsl root zlib
-
+    #module load cmake boost hdf5 gsl root zlib
+    if [[ ! -d ~/.local ]]; then
+    mkdir ~/.local
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
     tar xvfz pythia8235.tgz
     cd pythia8235
@@ -24,19 +24,21 @@ load_osg()
     make -j16
     make install
     cd ../..
-    wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
-    tar -xvzf openmpi-4.0.0.tar.gz
-    cd openmpi-4.0.0
-    ./configure --prefix=~/.local
-    make all install
-    cd ..
+    #wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz
+    #tar -xvzf openmpi-4.0.0.tar.gz
+    #cd openmpi-4.0.0
+    #./configure --prefix=~/.local
+    #make all install
+    #cd ..
     #rm -r pythia8235* hepmc3.0.0* openmpi-4.0.0*
 
 }
 
-if [[ $(hostname) =~ opensciencegrid.org|osgconnect.net ]]; then
-  load_osg
-fi
+#if [[ $(hostname) =~ opensciencegrid.org|osgconnect.net ]]; then
+# load_osg
+#fi
+
+load_required
 
 git clone https://github.com/KevinVan720/JETSCAPE-COMP
 cd JETSCAPE-COMP/external_packages
