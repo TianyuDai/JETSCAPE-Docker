@@ -12,7 +12,7 @@ load_required()
       mkdir ~/.local
     fi
     wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz
-    tar xvfz pythia8235.tgz
+    tar xvfz pythia8235.tgz*
     cd pythia8235
     ./configure --prefix=~/.local --enable-64bit
     make -j16
