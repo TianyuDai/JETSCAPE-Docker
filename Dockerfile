@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER wf39@duke.edu
 
-ENV workdir=/global/homes/w/wf39
+#ENV workdir=/global/homes/w/wf39
 
 ENV PACKAGES wget git ca-certificates rsync ssh\
              make gcc g++ cmake \
@@ -11,6 +11,8 @@ ENV PACKAGES wget git ca-certificates rsync ssh\
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${PACKAGES}
+
+#RUN mkdir -p workdir
 
 RUN mkdir /home/downloads
 
@@ -42,14 +44,14 @@ RUN rm -rf /home/downloads
 
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
-COPY JETSCAPE-COMP home/JETSCAPE-COMP
+COPY JETSCAPE-COMP /home/JETSCAPE-COMP
 
-RUN cd home/JETSCAPE-COMP &&\
+RUN cd /home/JETSCAPE-COMP &&\
     mkdir build && cd build &&\
     cmake -Dmusic=on -DiSS=on .. &&\
-    make -j8 &&\
-    cp -r home/JETSCAPE-COMP/build $workdir
+    make -j8
+    #cp -r /home/JETSCAPE-COMP/build $workdir
 
-WORKDIR $workdir
+WORKDIR /home/JETSCAPE-COMP/build
 
 #CMD ["./PythiaBrickTest"]
