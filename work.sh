@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /usr/JETSCAPE-COMP/build
-./brickTest
+./LidoPythiaBrickTest
+ls -a
 ./fjcorereaderTest
-cp hq_pT.dat /usr/output
+cp hqjet_pT_1.0_0.0.dat /usr/output
