@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER wf39@duke.edu
 
-ENV workdir /usr/bin
+ENV workdir /usr
 
 ENV PACKAGES wget git ca-certificates rsync ssh\
              make gcc g++ cmake \
@@ -17,6 +17,7 @@ RUN apt-get update && \
 WORKDIR ${workdir}
 
 RUN mkdir ${workdir}/downloads
+RUN mkdir ${workdir}/output
 
 RUN wget -P ${workdir}/downloads http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz &&\
     cd ${workdir}/downloads &&\
@@ -49,8 +50,8 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 COPY JETSCAPE-COMP ${workdir}/JETSCAPE-COMP
 
 RUN cd ${workdir}/JETSCAPE-COMP &&\
-    mkdir ${workdir}/app && cd ${workdir}/app &&\
-    cmake -Dmusic=on -DiSS=on ${workdir}/JETSCAPE-COMP &&\
+    mkdir ${workdir}/JETSCAPE-COMP/build && cd ${workdir}/JETSCAPE-COMP/build &&\
+    cmake -Dmusic=on -DiSS=on .. &&\
     make -j8 
 
 COPY work.sh ${workdir}
