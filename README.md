@@ -21,7 +21,7 @@
 `shifterimg images | grep '<user>'`
 4. Pull the shifter on Nersc
 `shifter --image=<user>/<name>:<version>`
-5. Submit file should be editted as the example in `jetscape-basic`
+5. Submit file should be editted as the example in *jetscape-basic*
 
 # Tips
 1. <workdir> is the location in docker space. It seems that we cannot set <workdir> under `/home`, or it may cause some permission errors. 
