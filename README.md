@@ -27,3 +27,4 @@
 1. <workdir> is the location in docker space. It seems that we cannot set <workdir> under `/home`, or it may cause some permission errors. 
 2. Using `git clone` in Dockerfile is tricky. I have iincluded an example here. I am not sure why does `ubuntu:latest` not work. I should study it further later. 
 3. Once the docker is built, all the files copied in Dockerfile will be stored. Even though you change those files locally, the remote stored files should still be the same. 
+4. In the Nersc submit file, `<path to executable>` should be the full path (e.g. no dot). 
