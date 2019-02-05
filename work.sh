@@ -1,7 +1,11 @@
 #!/bin/bash
 
-cd /usr/JETSCAPE-COMP/build
-./LidoPythiaBrickTest
+cd /usr/JETSCAPE/build
+#cd JETSCAPE/build
+#mkdir build
+#cmake ..
+#make -j 8
+
+./PythiaBrickTest
 ls -a
-./fjcorereaderTest
-cp hqjet_pT_1.0_0.0.dat /usr/output
+./FinalStateHadrons

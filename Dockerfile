@@ -1,7 +1,8 @@
 FROM ubuntu:latest
-MAINTAINER wf39@duke.edu
+MAINTAINER td115@duke.edu
 
 ENV workdir /usr
+WORKDIR ${workdir}
 
 ENV PACKAGES wget git ca-certificates rsync ssh\
              make gcc g++ cmake \
@@ -13,8 +14,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends ${PACKAGES}
 
 #RUN mkdir -p ${workdir} && cd ${workdir}
-
-WORKDIR ${workdir}
 
 RUN mkdir ${workdir}/downloads
 RUN mkdir ${workdir}/output
@@ -47,15 +46,15 @@ RUN rm -rf ${workdir}/downloads
 
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
-COPY JETSCAPE-COMP ${workdir}/JETSCAPE-COMP
+COPY JETSCAPE ${workdir}/JETSCAPE
 
-RUN cd ${workdir}/JETSCAPE-COMP &&\
-    mkdir ${workdir}/JETSCAPE-COMP/build && cd ${workdir}/JETSCAPE-COMP/build &&\
-    cmake -Dmusic=on -DiSS=on .. &&\
-    make -j8 
+RUN cd ${workdir}/JETSCAPE &&\
+    mkdir ${workdir}/JETSCAPE/build &&\
+    cd ${workdir}/JETSCAPE/build &&\
+    cmake .. &&\
+    make -j8
 
 COPY work.sh ${workdir}
 RUN chmod +x ${workdir}/work.sh
-
 
 
