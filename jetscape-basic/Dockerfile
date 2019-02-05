@@ -18,10 +18,10 @@ RUN apt-get update && \
 RUN mkdir ${workdir}/downloads
 RUN mkdir ${workdir}/output
 
-RUN wget -P ${workdir}/downloads http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz &&\
+RUN wget -P ${workdir}/downloads http://home.thep.lu.se/~torbjorn/pythia8/pythia8240.tgz &&\
     cd ${workdir}/downloads &&\
-    tar xvfz pythia8235.tgz &&\
-    cd pythia8235 &&\
+    tar xvfz pythia8240.tgz &&\
+    cd pythia8240 &&\
     ./configure --prefix=/usr/local &&\
     make -j8 &&\
     make install  
